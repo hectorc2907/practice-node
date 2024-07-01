@@ -1,3 +1,4 @@
+// read file modo sincrono paso por paso
 const fs = require("node:fs");
 
 console.log("Leyendo el primer archivo...");
