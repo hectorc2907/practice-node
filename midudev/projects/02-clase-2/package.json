@@ -5,7 +5,8 @@
   "main": "01-http.js",
   "scripts": {
     "dev:1": "nodemon 01-http.js",
-    "dev:2": "nodemon 02-routing.js"
+    "dev:2": "nodemon 02-routing.js",
+    "dev:3": "nodemon 03-express.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,8 @@
   "devDependencies": {
     "nodemon": "^3.1.4",
     "standard": "^17.1.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
