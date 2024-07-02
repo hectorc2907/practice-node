@@ -4,7 +4,8 @@
   "description": "",
   "main": "01-http.js",
   "scripts": {
-    "dev:1": "nodemon 01-http.js"
+    "dev:1": "nodemon 01-http.js",
+    "dev:2": "nodemon 02-routing.js"
   },
   "keywords": [],
   "author": "",
