@@ -4,10 +4,13 @@ const movies = require("./movies.json");
 const { validateMovie, validatePartialMovie } = require("./schemas/movies");
 
 const app = express();
+app.use(express.json());
 app.disable("x-powered-by");
 
-app.use(express.json());
+// metodos normales: GET/HEAD/POST
+// metodos complejos: PUT/PATCH/DELETE
 
+// Todos los recursos que sean MOVIES se identifica con /movies
 app.get("/movies", (req, res) => {
   const { genre } = req.query;
   if (genre) {
