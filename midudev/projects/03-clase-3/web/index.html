@@ -18,7 +18,7 @@
     </style>
     <script type="module">
       fetch("http://localhost:1234/movies")
-        .then((res) => json())
+        .then((res) => res.json())
         .then((movies) => {
           const html = movies
             .map((movie) => {
@@ -49,5 +49,7 @@
         });
     </script>
   </head>
-  <body></body>
+  <body>
+    <main></main>
+  </body>
 </html>
