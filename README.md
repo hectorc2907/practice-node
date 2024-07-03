@@ -6,3 +6,4 @@
  Carpeta Midudev  
 01 - Clase 1 | Ejercicios basicos de Node  
 02 - Clase 2 | Primera aplicacion con Node, API Pokemon
+03 - Clase 3 | Rutas, Cors, Validaciones con Zod
