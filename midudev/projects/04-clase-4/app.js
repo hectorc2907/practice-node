@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import { moviesRouter } from "./routes/movies";
+import { corsMiddleware } from "./middlewares/cors";
 
 const app = express();
 app.use(json());
