@@ -12,4 +12,8 @@ export class MovieModel {
     }
     return movies;
   }
+  static async getById({ id }) {
+    const movie = movies.find((movie) => movie.id === id);
+    return movie;
+  }
 }
