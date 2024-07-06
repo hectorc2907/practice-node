@@ -36,4 +36,9 @@ export class MovieModel {
     }
     return db.find({}).toArray();
   }
+  static async getById({ id }) {
+    const db = await connect();
+    const objectId = new ObjectId(id);
+    return db.findOne({ _id: objectId });
+  }
 }
