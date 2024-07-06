@@ -30,3 +30,6 @@ const movieSchema = z.object({
     }
   ),
 });
+export function validateMovie(input) {
+  return movieSchema.safeParse(input);
+}
