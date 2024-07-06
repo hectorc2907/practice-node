@@ -41,4 +41,12 @@ export class MovieModel {
     const objectId = new ObjectId(id);
     return db.findOne({ _id: objectId });
   }
+  static async create({ input }) {
+    const db = await connect();
+    const { insertedId } = await db.insertOne(input);
+    return {
+      id: insertedId,
+      ...input,
+    };
+  }
 }
