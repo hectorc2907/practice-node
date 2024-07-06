@@ -8,3 +8,14 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
+async function connect() {
+  try {
+    await client.connect();
+    const database = client.db("database");
+    return database.collection("movies");
+  } catch (error) {
+    console.error("Error connecting to the database");
+    console.error(error);
+    await client.close();
+  }
+}
