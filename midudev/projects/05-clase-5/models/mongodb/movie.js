@@ -49,4 +49,10 @@ export class MovieModel {
       ...input,
     };
   }
+  static async delete({ id }) {
+    const db = await connect();
+    const objectId = new ObjectId(id);
+    const { deletedCount } = await db.deleteOne({ _id: objectId });
+    return deletedCount > 0;
+  }
 }
