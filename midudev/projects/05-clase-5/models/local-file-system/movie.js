@@ -24,4 +24,10 @@ export class MovieModel {
     movies.push(newMovie);
     return newMovie;
   }
+  static async delete({ id }) {
+    const movieIndex = movies.findIndex((movie) => movie.id === id);
+    if (movieIndex === -1) return false;
+    movies.splice(movieIndex, 1);
+    return true;
+  }
 }
