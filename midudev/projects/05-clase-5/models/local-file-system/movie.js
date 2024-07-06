@@ -16,4 +16,12 @@ export class MovieModel {
     const movie = movies.find((movie) => movie.id === id);
     return movie;
   }
+  static async create({ input }) {
+    const newMovie = {
+      id: randomUUID(),
+      ...input,
+    };
+    movies.push(newMovie);
+    return newMovie;
+  }
 }
