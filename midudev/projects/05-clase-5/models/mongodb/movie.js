@@ -19,3 +19,21 @@ async function connect() {
     await client.close();
   }
 }
+export class MovieModel {
+  static async getAll({ genre }) {
+    const db = await connect();
+    if (genre) {
+      return db
+        .find({
+          genre: {
+            $elemMatch: {
+              $regex: genre,
+              $options: "i",
+            },
+          },
+        })
+        .toArray();
+    }
+    return db.find({}).toArray();
+  }
+}
