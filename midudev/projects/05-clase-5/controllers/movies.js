@@ -32,4 +32,16 @@ export class MovieController {
     }
     return res.json({ message: "Movie delted" });
   };
+  update = async (req, res) => {
+    const result = validatePartialMovie(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: JSON.parse(result.error.message) });
+    }
+    const { id } = req.params;
+    const updatedMovie = await this.movieModel.update({
+      id,
+      input: result.data,
+    });
+    return res.json(updatedMovie);
+  };
 }
