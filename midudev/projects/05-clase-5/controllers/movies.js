@@ -15,4 +15,13 @@ export class MovieController {
     if (movie) return res.json(movie);
     res.status(404).json({ message: "Movie not found" });
   };
+  create = async (req, res) => {
+    const result = validateMovie(req.body);
+    if (!result.success) {
+      // 422 Unprocessable Entity
+      return res.status(400).json({ error: JSON.parse(result.error.message) });
+    }
+    const newMovie = await this.movieModel.create({ input: result.data });
+    res.status(201).json(newMovie);
+  };
 }
