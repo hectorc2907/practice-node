@@ -76,4 +76,10 @@ export class MovieModel {
     );
     return movies[0];
   }
+  static async delete({ id }) {
+    // ejercicio fácil: crear el delete
+  }
+  static async update({ id, input }) {
+    // ejercicio fácil: crear el update
+  }
 }
