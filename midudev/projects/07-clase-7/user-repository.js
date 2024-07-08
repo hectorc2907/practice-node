@@ -12,7 +12,7 @@ const User = Schema("User", {
 });
 
 export class UserRepository {
-  static create({ username, password }) {
+  static async create({ username, password }) {
     // 1. validaciones de username (opcional: usar zod)
     if (typeof username !== "string")
       throw new Error("username must be a string");
@@ -29,7 +29,7 @@ export class UserRepository {
 
     const id = crypto.randomUUID();
 
-    const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     User.create({
       _id: id,
