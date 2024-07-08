@@ -65,7 +65,9 @@ app.post("/register", async (req, res) => {
     res.status(400).send(error.message);
   }
 });
-app.post("/logout", (req, res) => {});
+app.post("/logout", (req, res) => {
+  res.clearCookie("access_token").json({ message: "Logout seccesful" });
+});
 
 app.get("/protected", (req, res) => {
   const { user } = req.session;
