@@ -9,4 +9,5 @@
 03 - Clase 3 | Rutas de acciones CRUD, Cors, Validaciones con Zod  
 04 - Clase 4 | MVC - Modelo Vista Controlador, Local y con MongoDB  
 05 - Clase 5 | Base de datos con MySQL y buenas practicas  
-06 - Clase 6 | Chat en tiempo real con Socket.io
+06 - Clase 6 | Chat en tiempo real con Socket.io  
+07 - clase 7 | Auth Usuario, Sesión, Cookies y JWT
