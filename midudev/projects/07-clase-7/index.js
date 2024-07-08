@@ -1,12 +1,16 @@
 import express from "express";
 import logger from "morgan";
 import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 import { PORT, SECRET_JWT_KEY } from "./config.js";
 import { UserRepository } from "./user-repository.js";
 
 const app = express();
+
 app.set("view engine", "ejs");
+
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(logger("dev"));
 
@@ -25,7 +29,14 @@ app.post("/login", async (req, res) => {
         expiresIn: "1h",
       }
     );
-    res.send({ user, token });
+    res
+      .cookie("access_token", token, {
+        httpOnly: true, // la cookie solo se puede acceder en el servidor
+        secure: process.env.NODE_ENV === "production", // la cookie solo se puede acceder en https
+        sameSite: "strict", // la cookie solo se puede acceder en el mismo dominio
+        maxAge: 1000 * 60 * 60, // la cookie tiene un tiempo de validez de 1 hora
+      })
+      .send({ user, token });
   } catch (error) {
     res.status(401).send(error.message);
   }
