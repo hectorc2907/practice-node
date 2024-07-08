@@ -15,6 +15,10 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("an user has disconnected");
   });
+
+  socket.on("chat message", (msg) => {
+    console.log("message: " + msg)
+  })
 });
 
 app.use(logger("dev"));
