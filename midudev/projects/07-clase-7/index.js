@@ -4,12 +4,13 @@ import { PORT } from "./config.js";
 import { UserRepository } from "./user-repository.js";
 
 const app = express();
+app.set("view engine", "ejs");
 app.use(express.json());
 
 app.use(logger("dev"));
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.render("index");
 });
 
 app.post("/login", async (req, res) => {
