@@ -23,7 +23,7 @@ await db.execute(`CREATE TABLE IF NOT EXISTS messages(
   content TEXT
   )`);
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("a user has connected!");
 
   socket.on("disconnect", () => {
@@ -43,6 +43,20 @@ io.on("connection", (socket) => {
     }
     io.emit("chat message", msg, result.lastInsertRowid.toString());
   });
+
+  if (!socket.recovered) {
+    try {
+      const results = await db.execute({
+        sql: "SELECT id, content FROM messages WHERE id > ?",
+        args: [socket.handshake.auth.serverOffset ?? 0],
+      });
+      results.rows.forEach((row) => {
+        socket.emit("chat message", row.content, row.id.toString());
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 });
 
 app.use(logger("dev"));
