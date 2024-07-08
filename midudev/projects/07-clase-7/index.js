@@ -15,7 +15,16 @@ app.use(cookieParser());
 app.use(logger("dev"));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.render("index");
+  }
+  try {
+    const data = jwt.verify(token, SECRET_JWT_KEY);
+    res.render("index", data);
+  } catch (error) {
+    res.render("index");
+  }
 });
 
 app.post("/login", async (req, res) => {
@@ -54,7 +63,16 @@ app.post("/register", async (req, res) => {
 app.post("/logout", (req, res) => {});
 
 app.get("/protected", (req, res) => {
-  res.render("protected");
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.status(403).send("Access not authorized");
+  }
+  try {
+    const data = jwt.verify(token, SECRET_JWT_KEY);
+    res.render("protected", data); // {_id, username}
+  } catch (error) {
+    res.status(401).send("Access not authorized");
+  }
 });
 
 app.listen(PORT, () => {
